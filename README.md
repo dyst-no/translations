@@ -49,7 +49,12 @@ console.log(translations.labels.userRole(UserRole.Admin)); // "Administrator"
 ### React
 
 ```typescript
-import { initializeTranslations, TranslationProvider, createLabel } from '@dyst-no/translations/react';
+import {
+  initializeTranslations,
+  TranslationProvider,
+  createLabel
+} from '@dyst-no/translations/react';
+import { storage, defaultDetectors } from '@dyst-no/translations/platforms/react';
 
 enum Priority {
   Low = 'low',
@@ -57,7 +62,11 @@ enum Priority {
   High = 'high'
 }
 
-const chain = initializeTranslations(['en', 'no'], 'en', {
+const translations = initializeTranslations(['en', 'no'], 'en', {
+  // Automatically persist locale to localStorage
+  storage: storage,
+  // Automatically detect locale from browser/navigator
+  detectors: defaultDetectors,
   labels: (t) => ({
     priority: createLabel(Priority, {
       [Priority.Low]: t('Low Priority').no('Lav prioritet'),
@@ -65,26 +74,33 @@ const chain = initializeTranslations(['en', 'no'], 'en', {
       [Priority.High]: t('High Priority').no('Høy prioritet'),
     }),
   }),
+  onLocaleChange: (locale, t) => {
+    // Optional: Handle locale changes (update external libraries, save to server, etc.)
+    console.log(`Locale changed to: ${locale}`);
+  },
 });
+
 const { useTranslation } = translations;
-export { chain, useTranslation };
 
 function Root() {
   return (
-    <TranslationProvider instance={chain}>
+    <TranslationProvider instance={translations}>
       <App />
     </TranslationProvider>
   );
 }
 
 function App() {
-  const { t, labels, changeLocale } = useTranslation();
+  const { t, labels, locale, changeLocale } = useTranslation();
 
   return (
     <div>
       <h1>{t('Task Manager').no('Oppgavebehandler')}</h1>
 
-      <select onChange={(e) => changeLocale(e.target.value)}>
+      {/* Locale is automatically detected and persisted */}
+      <p>Current locale: {locale}</p>
+
+      <select value={locale} onChange={(e) => changeLocale(e.target.value)}>
         <option value="en">English</option>
         <option value="no">Norsk</option>
       </select>
@@ -95,6 +111,7 @@ function App() {
     </div>
   );
 }
+```
 
 ## Development
 
