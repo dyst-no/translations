@@ -55,6 +55,11 @@ import {
   createLabel
 } from '@dyst-no/translations/react';
 import { storage, defaultDetectors } from '@dyst-no/translations/platforms/react';
+// Optional: For date formatting integration
+import { enGB as enDateFns, nb as noDateFns, type Locale, setDefaultOptions, format } from 'date-fns';
+// Optional: For validation message localization
+import { zodEn, zodNo } from '@dyst-no/translations/zod';
+import { z } from 'zod';
 
 enum Priority {
   Low = 'low',
@@ -75,8 +80,25 @@ const translations = initializeTranslations(['en', 'no'], 'en', {
     }),
   }),
   onLocaleChange: (locale, t) => {
-    // Optional: Handle locale changes (update external libraries, save to server, etc.)
-    console.log(`Locale changed to: ${locale}`);
+    // Optional: Update Zod locales for validation messages
+    const ZOD_LOCALES = {
+      en: zodEn,
+      no: zodNo,
+    } satisfies Record<string, any>;
+    z.config(ZOD_LOCALES[locale]());
+
+    // Optional: Update date-fns locale for date formatting
+    const DATE_FNS_LOCALES = {
+      en: enDateFns,
+      no: noDateFns,
+    } satisfies Record<string, Locale>;
+    setDefaultOptions({ locale: DATE_FNS_LOCALES[locale] });
+
+    // Optional: Save language preference to server
+    // authClient.updateUser({ language: locale as UserLanguage });
+
+    // Optional: Show success/error messages
+    // toast.success(t('Language updated').no('Språk oppdatert'));
   },
 });
 
@@ -93,12 +115,16 @@ function Root() {
 function App() {
   const { t, labels, locale, changeLocale } = useTranslation();
 
+  // Optional: Date formatting that respects current locale
+  const formattedDate = format(new Date(), 'PPPP'); // Uses current date-fns locale
+
   return (
     <div>
       <h1>{t('Task Manager').no('Oppgavebehandler')}</h1>
 
       {/* Locale is automatically detected and persisted */}
       <p>Current locale: {locale}</p>
+      <p>Formatted date: {formattedDate}</p>
 
       <select value={locale} onChange={(e) => changeLocale(e.target.value)}>
         <option value="en">English</option>
