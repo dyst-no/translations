@@ -29,6 +29,7 @@ export function initializeTranslations<
         {
           supportedLocales: locales,
           baseLocale,
+          returnPrimitive: true,
           currentLocale: locale,
         },
         { [baseLocale]: baseText },
