@@ -1,0 +1,54 @@
+{
+  "name": "@dyst-no/translations",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "react": "./src/react/index.ts",
+    "platforms/react": "./src/react/platforms/react/index.ts",
+    "platforms/react-native": "./src/react/platforms/react-native/index.ts",
+    "server": "./src/server/index.ts",
+    "zod": "./src/zod/index.ts"
+  },
+  "scripts": {
+    "test": "tsgo --noEmit && bun test"
+  },
+  "peerDependenciesMeta": {
+    "expo-localization": {
+      "optional": true
+    },
+    "expo-sqlite": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
+    "expo-localization": "^16.0.1",
+    "expo-sqlite": "^15.2.14",
+    "react-native": "^0.79.5",
+    "zod": "^3.25.67 || ^4.3.5"
+  },
+  "devDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "expo-localization": "^17.0.8",
+    "expo-sqlite": "^16.0.10",
+    "react-native": "^0.83.1",
+    "zod": "^4.3.5",
+    "@biomejs/biome": "2.3.2",
+    "@testing-library/react": "^16.3.1",
+    "@happy-dom/global-registrator": "^20.3.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@types/bun": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript/native-preview": "^7.0.0-dev.20260115.1"
+  }
+}
