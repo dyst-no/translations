@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 function formatDate(date: Date): string {
   const day = String(date.getDate()).padStart(2, '0');
@@ -212,7 +212,7 @@ const error: () => z.core.$ZodErrorMap = () => {
   };
 };
 
-export default function (): { localeError: z.core.$ZodErrorMap } {
+export default function (): Partial<z.core.$ZodConfig> {
   return {
     localeError: error(),
   };

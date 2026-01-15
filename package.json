@@ -1,14 +1,15 @@
 {
   "name": "@dyst-no/translations",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "exports": {
-    "react": "./src/react/index.ts",
-    "platforms/react": "./src/react/platforms/react/index.ts",
-    "platforms/react-native": "./src/react/platforms/react-native/index.ts",
-    "server": "./src/server/index.ts",
-    "zod": "./src/zod/index.ts"
+    "./core": "./src/core/index.ts",
+    "./react": "./src/react/index.ts",
+    "./platforms/react": "./src/platforms/react/index.ts",
+    "./platforms/react-native": "./src/platforms/react-native/index.ts",
+    "./server": "./src/server/index.ts",
+    "./zod": "./src/zod/index.ts"
   },
   "scripts": {
     "test": "tsgo --noEmit && bun test"

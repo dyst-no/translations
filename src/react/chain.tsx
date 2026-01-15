@@ -1,5 +1,13 @@
 import { createContext, useCallback, useContext, useState } from 'react';
-import type { ChainLocales, TranslationFunction, BaseChainInstance, LocaleDetector, StorageInterface } from '../core';
+import type {
+  ChainLocales,
+  TranslationFunction,
+  BaseChainInstance,
+  ExtractLocales,
+  ExtractTFunction,
+  LocaleDetector,
+  StorageInterface,
+} from '../core';
 import { detectLocale, createTranslationFunction, createLabel } from '../core';
 
 export interface ChainInstance<
@@ -159,5 +167,4 @@ export function initializeTranslations<
   return instance;
 }
 
-// Re-export createLabel for convenience
-export { createLabel };
+export { createLabel, type ExtractLocales, type ExtractTFunction };
