@@ -182,10 +182,7 @@ export function createTranslationFunction<TLocales extends readonly string[], TB
 export function createLabel<
   TEnum extends Record<string, string | number>,
   TResult extends { [K in keyof TEnum]: string },
->(
-  enumObj: TEnum,
-  translations: TResult
-) {
+>(enumObj: TEnum, translations: TResult) {
   return (value: TEnum[keyof TEnum] | keyof TEnum) => {
     for (const key in enumObj) {
       if (enumObj[key] === value || key === value) {

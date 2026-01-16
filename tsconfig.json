@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "ES2022"
-    ],
+    "lib": ["dom", "ES2022"],
     "module": "ES2022",
     "target": "ES2022",
     "composite": false,
@@ -19,10 +16,7 @@
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": true
   },
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "exclude": ["**/*.test.ts", "**/*.test.tsx"]
 }
