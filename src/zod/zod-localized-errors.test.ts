@@ -1,5 +1,5 @@
 import { test, expect, describe, beforeEach } from 'bun:test';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import { initializeTranslations } from '../react/chain';
 import { storage, detectors } from '../platforms/react';
 import { zodEn, zodNo, zodPl } from '.';
