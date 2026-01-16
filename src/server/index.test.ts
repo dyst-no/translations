@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { type ExtractLocales } from '../core';
+import type { ExtractLocales } from '../core';
 import { initializeTranslations, createLabel } from '.';
 
 test('translation chain', () => {
