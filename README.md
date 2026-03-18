@@ -144,3 +144,28 @@ function App() {
 ```bash
 # Run tests
 bun run test
+```
+
+## Releasing
+
+Pick the bump you want and release from either GitHub Actions or locally.
+
+### GitHub Actions
+
+Run the `Release` workflow manually and choose one of:
+
+- `patch` for fixes and small non-breaking updates
+- `minor` for new backward-compatible features
+- `major` for breaking changes
+
+The workflow will build, test, bump the version you chose, copy commit messages since the previous tag into `CHANGELOG.md`, create a release commit and tag, and publish to npm.
+
+### Local release
+
+```bash
+bun run release:patch
+bun run release:minor
+bun run release:major
+```
+
+Each command builds, tests, bumps the version you chose, copies commit messages since the previous tag into `CHANGELOG.md`, creates a release commit and tag, and publishes to npm.
