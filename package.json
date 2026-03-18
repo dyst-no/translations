@@ -95,10 +95,11 @@
 		"@types/bun": "latest",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"@typescript/native-preview": "^7.0.0-dev.20260318.1",
 		"expo-localization": "^16.0.1",
 		"expo-sqlite": "^15.2.14",
-		"typescript": "^5.9.3",
 		"tsdown": "^0.14.2",
+		"typescript": "^5.9.3",
 		"zod": "^4.3.5"
 	}
 }
