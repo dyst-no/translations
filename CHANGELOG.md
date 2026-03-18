@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 - 2026-03-18
+
+- use tsgo and tsdown for releases ([`39d11ef`](https://github.com/dyst-no/translations/commit/39d11ef47a0013067c8267bcc65ead52ca78d0a8))
+- tighten translations formatting and linting ([`3964aae`](https://github.com/dyst-no/translations/commit/3964aae3e1ff7743a584162e9b9aa1d53800109a))
+- restore public locale properties ([`6ee794c`](https://github.com/dyst-no/translations/commit/6ee794cee9f847158d8d641feebe9eeee2f0e5c4))
+
 ## 0.1.1 - 2026-03-18
 
 - update workflows for trusted publishing ([`1215d9a`](https://github.com/dyst-no/translations/commit/1215d9adce15674301235231318dffecaf9f4c14))
