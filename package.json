@@ -1,6 +1,6 @@
 {
 	"name": "@dyst-no/translations",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "TypeScript-first translations for server, React, and React Native.",
 	"keywords": [
 		"i18n",
