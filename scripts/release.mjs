@@ -24,6 +24,20 @@ const capture = (command) =>
 const readVersion = () =>
 	JSON.parse(readFileSync("package.json", "utf8")).version;
 
+const getCommitUrlBase = () => {
+	const packageJson = JSON.parse(readFileSync("package.json", "utf8"));
+	const repositoryUrl = packageJson.repository?.url;
+
+	if (!repositoryUrl) {
+		return null;
+	}
+
+	return repositoryUrl
+		.replace(/^git\+/, "")
+		.replace(/\.git$/, "")
+		.replace(/\/$/, "");
+};
+
 const getLastTag = () => {
 	try {
 		return capture("git describe --tags --abbrev=0");
@@ -34,7 +48,10 @@ const getLastTag = () => {
 
 const getCommitMessages = (lastTag) => {
 	const range = lastTag ? `${lastTag}..HEAD` : "HEAD";
-	const output = capture(`git log ${range} --reverse --pretty=format:%s`);
+	const output = capture(
+		`git log ${range} --reverse --pretty=format:%H%x09%h%x09%s`,
+	);
+	const commitUrlBase = getCommitUrlBase();
 
 	if (!output) {
 		throw new Error("No commits found to include in the changelog.");
@@ -44,7 +61,14 @@ const getCommitMessages = (lastTag) => {
 		.split("\n")
 		.map((line) => line.trim())
 		.filter(Boolean)
-		.map((line) => `- ${line}`)
+		.map((line) => {
+			const [hash, shortHash, subject] = line.split("\t");
+			const commitRef = commitUrlBase
+				? `[\`${shortHash}\`](${commitUrlBase}/commit/${hash})`
+				: `\`${shortHash}\``;
+
+			return `- ${subject} (${commitRef})`;
+		})
 		.join("\n");
 };
 
