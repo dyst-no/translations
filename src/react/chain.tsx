@@ -1,14 +1,14 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 import type {
-  ChainLocales,
-  TranslationFunction,
   BaseChainInstance,
+  ChainLocales,
   ExtractLocales,
   ExtractTFunction,
   LocaleDetector,
   StorageInterface,
+  TranslationFunction,
 } from '../core';
-import { detectLocale, createTranslationFunction, createLabel } from '../core';
+import { createLabel, createTranslationFunction, detectLocale } from '../core';
 
 export interface ChainInstance<
   TLocales extends readonly string[],

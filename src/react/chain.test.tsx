@@ -1,9 +1,7 @@
-// biome-ignore lint/correctness/noUnusedImports: we need react for the type checking in IDE
-import React from 'react';
-import { test, expect, beforeEach } from 'bun:test';
-import { render, screen, act } from '@testing-library/react';
-import { createLabel, initializeTranslations, TranslationProvider, type ChainInstance } from './chain';
+import { beforeEach, expect, test } from 'bun:test';
+import { act, render, screen } from '@testing-library/react';
 import { detectors, storage } from '../platforms/react';
+import { type ChainInstance, createLabel, initializeTranslations, TranslationProvider } from './chain';
 
 beforeEach(() => {
   // Clear any potential state between tests
@@ -62,7 +60,9 @@ test('Translation Provider and Hook usage', () => {
 });
 
 test('Translation store usage', () => {
-  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', { storage });
+  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', {
+    storage,
+  });
   const { translationStore } = chain;
 
   expect(translationStore.locale).toBe('en');
@@ -90,7 +90,9 @@ test('onLocaleChange callback', async () => {
 });
 
 test('default locale when no detection method is available', () => {
-  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', { storage });
+  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', {
+    storage,
+  });
   expect(chain.translationStore.locale).toBe('en');
 });
 
@@ -167,7 +169,9 @@ test('custom detector implementation', () => {
 });
 
 test('storage persistence', async () => {
-  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', { storage });
+  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', {
+    storage,
+  });
 
   await chain.translationStore.changeLocale('no');
   expect(localStorage.getItem('locale')).toBe('no');
@@ -180,7 +184,9 @@ test('storage persistence', async () => {
 });
 
 test('null and undefined handling fallback to base locale', () => {
-  const chain = initializeTranslations(['en', 'no', 'pl'] as const, 'en', { storage });
+  const chain = initializeTranslations(['en', 'no', 'pl'] as const, 'en', {
+    storage,
+  });
   const { translationStore } = chain;
 
   // Test with null values - should fallback to base locale (en)
@@ -230,7 +236,10 @@ test('primitive mode: chaining unsupported locales after completion throws an er
   expect(greeting).toBe('another' as any);
 });
 test('primitive mode: final translation returns a primitive string', () => {
-  const chain = initializeTranslations(['en', 'no'] as const, 'en', { storage, returnPrimitive: true });
+  const chain = initializeTranslations(['en', 'no'] as const, 'en', {
+    storage,
+    returnPrimitive: true,
+  });
   const { translationStore } = chain;
   // Set locale to 'en'
   act(() => {

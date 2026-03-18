@@ -1,5 +1,5 @@
-import type { BaseChainInstance, TranslationFunction, ChainLocales } from '../core';
-import { TranslationBuilder, createLabel, type ExtractLocales, type ExtractTFunction } from '../core';
+import type { BaseChainInstance, ChainLocales, TranslationFunction } from '../core';
+import { createLabel, type ExtractLocales, type ExtractTFunction, TranslationBuilder } from '../core';
 
 export interface ChainInstance<
   TLocales extends readonly string[],

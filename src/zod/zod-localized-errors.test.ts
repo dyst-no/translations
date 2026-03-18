@@ -1,7 +1,7 @@
-import { test, expect, describe, beforeEach } from 'bun:test';
+import { beforeEach, describe, expect, test } from 'bun:test';
 import { z } from 'zod';
+import { detectors, storage } from '../platforms/react';
 import { initializeTranslations } from '../react/chain';
-import { storage, detectors } from '../platforms/react';
 import { zodEn, zodNo, zodPl } from '.';
 
 beforeEach(() => {

@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
 import type { ExtractLocales } from '../core';
-import { initializeTranslations, createLabel } from '.';
+import { createLabel, initializeTranslations } from '.';
 
 test('translation chain', () => {
   const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en');
@@ -44,7 +44,11 @@ test('incomplete translation chain', () => {
   const incomplete = t('hello').no('hei');
 
   // Verify the incomplete chain has the correct type
-  type HasRoMethod = typeof incomplete extends { ro: (text: string) => any } ? true : false;
+  type HasRoMethod = typeof incomplete extends {
+    ro: (text: string) => unknown;
+  }
+    ? true
+    : false;
   const _typeCheck: true = {} as HasRoMethod;
 
   // Runtime check - incomplete chains should still return the base language

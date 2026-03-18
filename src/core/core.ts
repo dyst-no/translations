@@ -61,18 +61,14 @@ export interface BaseChainInstance<TLocales extends readonly string[], TBase ext
   baseLocale: TBase;
 }
 
+type AnyChainInstance = BaseChainInstance<readonly string[], string>;
+
 // Utility types for extracting information from ChainInstance implementations
-export type ExtractLocales<T extends BaseChainInstance<any, any>> = T extends BaseChainInstance<
-  infer TLocales,
-  infer _TBase
->
+export type ExtractLocales<T extends AnyChainInstance> = T extends BaseChainInstance<infer TLocales, infer _TBase>
   ? TLocales
   : never;
 
-export type ExtractTFunction<T extends BaseChainInstance<any, any>> = T extends BaseChainInstance<
-  infer TLocales,
-  infer TBase
->
+export type ExtractTFunction<T extends AnyChainInstance> = T extends BaseChainInstance<infer TLocales, infer TBase>
   ? TranslationFunction<TLocales, TBase>
   : never;
 
@@ -123,7 +119,7 @@ export class TranslationBuilder<T extends Translations<string>> extends String {
 
           // Return a new TranslationBuilder with the updated translations
           // This enables method chaining like: t('Hello').en('Hello').no('Hei')
-          return new TranslationBuilder(this.config, newTranslations as any);
+          return new TranslationBuilder(this.config, newTranslations as Translations<string>);
         };
       },
     });
