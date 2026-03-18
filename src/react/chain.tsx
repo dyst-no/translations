@@ -15,6 +15,8 @@ export interface ChainInstance<
   TBase extends TLocales[number],
   TLabels extends Record<string, any> = Record<string, never>,
 > extends BaseChainInstance<TLocales, TBase> {
+  supportedLocales: TLocales;
+  baseLocale: TBase;
   useTranslation: () => {
     t: TranslationFunction<TLocales, TBase>;
     changeLocale: (locale: TLocales[number]) => void;
