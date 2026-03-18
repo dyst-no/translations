@@ -30,35 +30,35 @@
 	},
 	"exports": {
 		"./core": {
-			"types": "./dist/core/index.d.ts",
-			"import": "./dist/core.js"
+			"types": "./dist/core.d.mts",
+			"import": "./dist/core.mjs"
 		},
 		"./react": {
-			"types": "./dist/react/index.d.ts",
-			"import": "./dist/react.js"
+			"types": "./dist/react.d.mts",
+			"import": "./dist/react.mjs"
 		},
 		"./platforms/react": {
-			"types": "./dist/platforms/react/index.d.ts",
-			"import": "./dist/platforms/react.js"
+			"types": "./dist/platforms/react.d.mts",
+			"import": "./dist/platforms/react.mjs"
 		},
 		"./platforms/react-native": {
-			"types": "./dist/platforms/react-native/index.d.ts",
-			"import": "./dist/platforms/react-native.js"
+			"types": "./dist/platforms/react-native.d.mts",
+			"import": "./dist/platforms/react-native.mjs"
 		},
 		"./server": {
-			"types": "./dist/server/index.d.ts",
-			"import": "./dist/server.js"
+			"types": "./dist/server.d.mts",
+			"import": "./dist/server.mjs"
 		},
 		"./zod": {
-			"types": "./dist/zod/index.d.ts",
-			"import": "./dist/zod.js"
+			"types": "./dist/zod.d.mts",
+			"import": "./dist/zod.mjs"
 		},
 		"./package.json": "./package.json"
 	},
 	"scripts": {
-		"build": "tsdown && tsc -p tsconfig.build.json",
-		"typecheck": "tsc --pretty false",
-		"test": "tsgo --noEmit && bun test",
+		"build": "tsdown",
+		"typecheck": "tsgo --noEmit",
+		"test": "bun run typecheck && bun test",
 		"release": "node scripts/release.mjs",
 		"release:patch": "node scripts/release.mjs patch",
 		"release:minor": "node scripts/release.mjs minor",
@@ -98,8 +98,7 @@
 		"@typescript/native-preview": "^7.0.0-dev.20260318.1",
 		"expo-localization": "^16.0.1",
 		"expo-sqlite": "^15.2.14",
-		"tsdown": "^0.14.2",
-		"typescript": "^5.9.3",
+		"tsdown": "^0.21.4",
 		"zod": "^4.3.5"
 	}
 }

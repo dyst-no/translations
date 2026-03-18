@@ -10,15 +10,17 @@ export default defineConfig({
 		"platforms/react-native": "src/platforms/react-native/index.ts",
 	},
 	format: ["esm"],
-	dts: false,
+	dts: true,
 	clean: true,
 	sourcemap: true,
-	external: [
-		"react",
-		"react-dom",
-		"react-native",
-		"expo-localization",
-		"expo-sqlite",
-		"zod",
-	],
+	deps: {
+		neverBundle: [
+			"react",
+			"react-dom",
+			"react-native",
+			"expo-localization",
+			"expo-sqlite",
+			"zod",
+		],
+	},
 });
