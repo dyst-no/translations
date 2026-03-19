@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 - 2026-03-19
+
+- stabilize exported declaration types ([`28a878f`](https://github.com/dyst-no/translations/commit/28a878f5d04dea440eeab297e1a8ccf626f2e06c))
+
 ## 0.1.3 - 2026-03-19
 
 - use tsc for translations typecheck ([`ca2c177`](https://github.com/dyst-no/translations/commit/ca2c1772e19fdb1b535ea34aee667b944060175b))
