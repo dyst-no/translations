@@ -1,5 +1,11 @@
 import type { BaseChainInstance, ChainLocales, TranslationFunction } from '../core';
-import { createLabel, type ExtractLocales, type ExtractTFunction, TranslationBuilder } from '../core';
+import {
+  createLabel,
+  type ExtractCreateTranslation,
+  type ExtractLocales,
+  type ExtractTFunction,
+  TranslationBuilder,
+} from '../core';
 
 export interface ChainInstance<
   TLocales extends readonly string[],
@@ -50,4 +56,4 @@ export function initializeTranslations<
   return { createTranslation, supportedLocales: locales, baseLocale, labels };
 }
 
-export { createLabel, type ExtractLocales, type ExtractTFunction };
+export { createLabel, type ExtractCreateTranslation, type ExtractLocales, type ExtractTFunction };

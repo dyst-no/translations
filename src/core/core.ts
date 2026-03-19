@@ -72,6 +72,10 @@ export type ExtractTFunction<T extends AnyChainInstance> = T extends BaseChainIn
   ? TranslationFunction<TLocales, TBase>
   : never;
 
+export type ExtractCreateTranslation<T extends AnyChainInstance> = (
+  locale: ExtractLocales<T>[number],
+) => ExtractTFunction<T>;
+
 export interface TranslationBuilderConfig {
   supportedLocales: readonly string[];
   baseLocale: string;

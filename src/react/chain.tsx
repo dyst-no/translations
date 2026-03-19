@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useState } from 'react';
 import type {
   BaseChainInstance,
   ChainLocales,
+  ExtractCreateTranslation,
   ExtractLocales,
   ExtractTFunction,
   LocaleDetector,
@@ -169,4 +170,4 @@ export function initializeTranslations<
   return instance;
 }
 
-export { createLabel, type ExtractLocales, type ExtractTFunction };
+export { createLabel, type ExtractCreateTranslation, type ExtractLocales, type ExtractTFunction };
