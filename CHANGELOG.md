@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 - 2026-03-19
+
+- use tsc for translations typecheck ([`ca2c177`](https://github.com/dyst-no/translations/commit/ca2c1772e19fdb1b535ea34aee667b944060175b))
+- export createTranslation helper type ([`7590c89`](https://github.com/dyst-no/translations/commit/7590c89f8fce2366c4f7ee70916e9d2165fbfc42))
+
 ## 0.1.2 - 2026-03-18
 
 - use tsgo and tsdown for releases ([`39d11ef`](https://github.com/dyst-no/translations/commit/39d11ef47a0013067c8267bcc65ead52ca78d0a8))
