@@ -10,7 +10,7 @@ export default defineConfig({
     'platforms/react-native': 'src/platforms/react-native/index.ts',
   },
   format: ['esm'],
-  dts: true,
+  dts: false,
   clean: true,
   sourcemap: true,
   deps: {

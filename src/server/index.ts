@@ -1,6 +1,7 @@
-import type { BaseChainInstance, ChainLocales, TranslationFunction } from '../core';
+import type { BaseChainInstance, ChainLocales, CreateTranslationFn, TranslationFunction } from '../core';
 import {
   createLabel,
+  type CreateTranslationFn as CreateTranslationFnType,
   type ExtractCreateTranslation,
   type ExtractLocales,
   type ExtractTFunction,
@@ -12,7 +13,7 @@ export interface ChainInstance<
   TBase extends TLocales[number],
   TLabels extends Record<string, any> = Record<string, never>,
 > extends BaseChainInstance<TLocales, TBase> {
-  createTranslation: (locale: TLocales[number]) => TranslationFunction<TLocales, TBase>;
+  createTranslation: CreateTranslationFn<TLocales, TBase>;
   labels: TLabels;
 }
 
@@ -56,4 +57,10 @@ export function initializeTranslations<
   return { createTranslation, supportedLocales: locales, baseLocale, labels };
 }
 
-export { createLabel, type ExtractCreateTranslation, type ExtractLocales, type ExtractTFunction };
+export {
+  createLabel,
+  type CreateTranslationFnType as CreateTranslationFn,
+  type ExtractCreateTranslation,
+  type ExtractLocales,
+  type ExtractTFunction,
+};

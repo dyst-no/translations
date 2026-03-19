@@ -8,6 +8,8 @@ import type {
   LocaleDetector,
   StorageInterface,
   TranslationFunction,
+  UseTranslationFn,
+  UseTranslationResult,
 } from '../core';
 import { createLabel, createTranslationFunction, detectLocale } from '../core';
 
@@ -18,18 +20,8 @@ export interface ChainInstance<
 > extends BaseChainInstance<TLocales, TBase> {
   supportedLocales: TLocales;
   baseLocale: TBase;
-  useTranslation: () => {
-    t: TranslationFunction<TLocales, TBase>;
-    changeLocale: (locale: TLocales[number]) => void;
-    locale: TLocales[number];
-    labels: TLabels;
-  };
-  translationStore: {
-    t: TranslationFunction<TLocales, TBase>;
-    changeLocale: (locale: TLocales[number]) => void;
-    locale: TLocales[number];
-    labels: TLabels;
-  };
+  useTranslation: UseTranslationFn<TLocales, TBase, TLabels>;
+  translationStore: UseTranslationResult<TLocales, TBase, TLabels>;
 }
 
 const TranslationContext = createContext<{
@@ -171,3 +163,4 @@ export function initializeTranslations<
 }
 
 export { createLabel, type ExtractCreateTranslation, type ExtractLocales, type ExtractTFunction };
+export type { UseTranslationFn, UseTranslationResult };

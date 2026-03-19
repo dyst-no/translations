@@ -30,33 +30,33 @@
   },
   "exports": {
     "./core": {
-      "types": "./dist/core.d.mts",
+      "types": "./dist/core/index.d.ts",
       "import": "./dist/core.mjs"
     },
     "./react": {
-      "types": "./dist/react.d.mts",
+      "types": "./dist/react/index.d.ts",
       "import": "./dist/react.mjs"
     },
     "./platforms/react": {
-      "types": "./dist/platforms/react.d.mts",
+      "types": "./dist/platforms/react/index.d.ts",
       "import": "./dist/platforms/react.mjs"
     },
     "./platforms/react-native": {
-      "types": "./dist/platforms/react-native.d.mts",
+      "types": "./dist/platforms/react-native/index.d.ts",
       "import": "./dist/platforms/react-native.mjs"
     },
     "./server": {
-      "types": "./dist/server.d.mts",
+      "types": "./dist/server/index.d.ts",
       "import": "./dist/server.mjs"
     },
     "./zod": {
-      "types": "./dist/zod.d.mts",
+      "types": "./dist/zod/index.d.ts",
       "import": "./dist/zod.mjs"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown && tsc -p tsconfig.build.json",
     "format": "biome check --write --error-on-warnings .",
     "typecheck": "tsc --pretty false --noEmit",
     "test": "bun run typecheck && bun test",

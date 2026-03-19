@@ -76,6 +76,27 @@ export type ExtractCreateTranslation<T extends AnyChainInstance> = (
   locale: ExtractLocales<T>[number],
 ) => ExtractTFunction<T>;
 
+export type CreateTranslationFn<TLocales extends readonly string[], TBase extends TLocales[number]> = (
+  locale: TLocales[number],
+) => TranslationFunction<TLocales, TBase>;
+
+export interface UseTranslationResult<
+  TLocales extends readonly string[],
+  TBase extends TLocales[number],
+  TLabels extends Record<string, any> = Record<string, never>,
+> {
+  t: TranslationFunction<TLocales, TBase>;
+  changeLocale: (locale: TLocales[number]) => void;
+  locale: TLocales[number];
+  labels: TLabels;
+}
+
+export type UseTranslationFn<
+  TLocales extends readonly string[],
+  TBase extends TLocales[number],
+  TLabels extends Record<string, any> = Record<string, never>,
+> = () => UseTranslationResult<TLocales, TBase, TLabels>;
+
 export interface TranslationBuilderConfig {
   supportedLocales: readonly string[];
   baseLocale: string;
