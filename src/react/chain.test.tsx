@@ -59,6 +59,40 @@ test('Translation Provider and Hook usage', () => {
   expect(screen.getByTestId('current-locale').textContent).toBe('no');
 });
 
+test('imperative store.changeLocale re-renders consumers', () => {
+  // Regression: calling changeLocale directly on the store (e.g. from a router
+  // loader, outside React) must repaint components, not just mutate the store.
+  const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', { storage });
+  const { useTranslation, translationStore } = chain;
+
+  function TestComponent() {
+    const { t, locale } = useTranslation();
+    return (
+      <div>
+        <div data-testid="greeting">{t('hello').no('hei').ro('salut')}</div>
+        <div data-testid="current-locale">{locale}</div>
+      </div>
+    );
+  }
+
+  render(
+    <TranslationProvider instance={chain}>
+      <TestComponent />
+    </TranslationProvider>,
+  );
+
+  expect(screen.getByTestId('greeting').textContent).toBe('hello');
+  expect(screen.getByTestId('current-locale').textContent).toBe('en');
+
+  // Bypass the hook's changeLocale entirely — mutate the store directly.
+  act(() => {
+    translationStore.changeLocale('no');
+  });
+
+  expect(screen.getByTestId('greeting').textContent).toBe('hei');
+  expect(screen.getByTestId('current-locale').textContent).toBe('no');
+});
+
 test('Translation store usage', () => {
   const chain = initializeTranslations(['en', 'no', 'ro'] as const, 'en', {
     storage,

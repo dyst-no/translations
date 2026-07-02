@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useContext, useSyncExternalStore } from 'react';
 import type {
   BaseChainInstance,
   ChainLocales,
@@ -21,7 +21,10 @@ export interface ChainInstance<
   supportedLocales: TLocales;
   baseLocale: TBase;
   useTranslation: UseTranslationFn<TLocales, TBase, TLabels>;
-  translationStore: UseTranslationResult<TLocales, TBase, TLabels>;
+  translationStore: UseTranslationResult<TLocales, TBase, TLabels> & {
+    /** Subscribe to locale changes; returns an unsubscribe fn. Used by the provider. */
+    subscribe: (listener: () => void) => () => void;
+  };
 }
 
 const TranslationContext = createContext<{
@@ -41,7 +44,6 @@ export function useUntypedTranslation<TInstance extends ChainInstance<any, any, 
   return context as ReturnType<TInstance['useTranslation']>;
 }
 
-// Update TranslationProvider to accept instance prop
 export function TranslationProvider({
   children,
   instance,
@@ -49,23 +51,23 @@ export function TranslationProvider({
   children: React.ReactNode;
   instance: ChainInstance<any, any, any>;
 }) {
-  const [locale, setLocale] = useState(instance.translationStore.locale);
-
-  const changeLocale = useCallback(
-    (newLocale: typeof locale) => {
-      setLocale(newLocale);
-      instance.translationStore.changeLocale(newLocale);
-    },
-    [instance.translationStore.changeLocale],
+  const store = instance.translationStore;
+  // Subscribe to the store so ANY locale change re-renders consumers — including
+  // imperative store.changeLocale() calls made outside React (e.g. from a router
+  // loader). Mirroring the locale into useState missed those and left t()/labels stale.
+  useSyncExternalStore(
+    store.subscribe,
+    () => store.locale,
+    () => store.locale,
   );
 
   return (
     <TranslationContext.Provider
       value={{
-        t: instance.translationStore.t,
-        changeLocale,
-        locale,
-        labels: instance.translationStore.labels,
+        t: store.t,
+        changeLocale: store.changeLocale,
+        locale: store.locale,
+        labels: store.labels,
       }}
     >
       {children}
@@ -115,7 +117,12 @@ export function initializeTranslations<
     changeLocale: (locale: SupportedLocales) => void;
     locale: SupportedLocales;
     labels: TLabels;
+    subscribe: (listener: () => void) => () => void;
   };
+
+  // Subscribers notified on every locale change so React (via useSyncExternalStore)
+  // stays in lockstep with the store, no matter who calls changeLocale.
+  const listeners = new Set<() => void>();
 
   // Create a function that generates the t function wrapper
   const createTFunction = (): TranslationFunction<TLocales, TBase> => {
@@ -135,6 +142,12 @@ export function initializeTranslations<
     locale: initialLocale,
     t: createTFunction(),
     labels: createLabels(),
+    subscribe: (listener) => {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
     changeLocale: (newLocale: SupportedLocales) => {
       translationStore.locale = newLocale;
       localeHolder.current = newLocale;
@@ -145,6 +158,9 @@ export function initializeTranslations<
       options.onLocaleChange?.(newLocale, translationStore.t);
       if (options?.storage?.setItem) {
         options.storage.setItem('locale', newLocale);
+      }
+      for (const listener of listeners) {
+        listener();
       }
     },
   };
