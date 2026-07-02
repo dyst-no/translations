@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.5 - 2026-07-02
+
+- chore: add bunfig minimumReleaseAge of 7 days ([`205e47a`](https://github.com/dyst-no/translations/commit/205e47a2c0b0ea69d5bbb4d583cacfb6c1174873))
+- chore: exclude @dyst-no/* scope from minimumReleaseAge gate ([`fc67be9`](https://github.com/dyst-no/translations/commit/fc67be929e9f0b0ad4fb5920e43041248db5afeb))
+- Merge pull request #1 from dyst-no/chore/bunfig-min-release-age ([`89d5ab3`](https://github.com/dyst-no/translations/commit/89d5ab38f7462432b6d1ef995777e7dbb20b0f7e))
+- fix: re-render on imperative store.changeLocale (useSyncExternalStore) ([`3dc0a92`](https://github.com/dyst-no/translations/commit/3dc0a920891e4998924488bbc7c72e4aaa7e2a5a))
+- Merge pull request #2 from dyst-no/fix/reactive-store-subscription ([`da5da09`](https://github.com/dyst-no/translations/commit/da5da0959a28f26f6516d0d8e102e22dc3bcebd2))
+
 ## 0.1.4 - 2026-03-19
 
 - stabilize exported declaration types ([`28a878f`](https://github.com/dyst-no/translations/commit/28a878f5d04dea440eeab297e1a8ccf626f2e06c))
