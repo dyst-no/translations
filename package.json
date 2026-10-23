@@ -58,7 +58,7 @@
   "scripts": {
     "build": "tsdown && tsc -p tsconfig.build.json",
     "format": "biome check --write --error-on-warnings .",
-    "typecheck": "tsc --pretty false --noEmit",
+    "typecheck": "bun check --no-pretty",
     "test": "bun run typecheck && bun test",
     "release": "node scripts/release.mjs",
     "release:patch": "node scripts/release.mjs patch",
