@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.6 - 2026-11-13
+
+- Type check with bun check instead of tsc ([`60cc069`](https://github.com/dyst-no/translations/commit/60cc0690d8aac796b528d5b2122202f8013f44ec))
+- Merge pull request #3 from dyst-no/bun-check ([`d7a1b2c`](https://github.com/dyst-no/translations/commit/d7a1b2c7f7930734c81424f7827ed25b79f95553))
+- Remove @testing-library/jest-dom; its matchers were registered but never used ([`ecf5426`](https://github.com/dyst-no/translations/commit/ecf5426774fa5dd3386b2683d324553b3b145ef5))
+- Drop react-dom peer dependency; the library only imports react ([`2399ffc`](https://github.com/dyst-no/translations/commit/2399ffc08698fa48faf86a615cab344faaa61d3c))
+- Merge pull request #4 from dyst-no/dependency-cuts ([`e6f3f36`](https://github.com/dyst-no/translations/commit/e6f3f365947385df918e56142c0e81bd06184d9d))
+
 ## 0.1.5 - 2026-07-02
 
 - chore: add bunfig minimumReleaseAge of 7 days ([`205e47a`](https://github.com/dyst-no/translations/commit/205e47a2c0b0ea69d5bbb4d583cacfb6c1174873))
