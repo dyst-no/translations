@@ -14,6 +14,6 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   deps: {
-    neverBundle: ['react', 'react-dom', 'react-native', 'expo-localization', 'expo-sqlite', 'zod'],
+    neverBundle: ['react', 'react-native', 'expo-localization', 'expo-sqlite', 'zod'],
   },
 });
